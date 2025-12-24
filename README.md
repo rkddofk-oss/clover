@@ -1,25 +1,24 @@
-# clover
-homekma
+# christmas-in-myeongdong.html — 2025 명동 도심 여행 가이드
 
-## 저장소 파일 목록 및 외부 URL 🔗
-아래는 이 저장소에 포함된 주요 파일들과 외부에서 접근할 수 있는 링크입니다. 링크를 클릭하면 GitHub에서 파일을 바로 확인할 수 있습니다.
+이 저장소에 포함된 HTML 파일을 외부에서 바로 열어볼 수 있는 URL과 간단한 사용법을 정리합니다.
 
-- **`ai_studio_code (8).html`** — GitHub에서 보기: https://github.com/rkddofk-oss/clover/blob/main/ai_studio_code%20(8).html
-  - 설명: AI Studio에서 생성된 HTML 파일(이미지나 스크립트를 포함할 수 있음).
-  - 원시(Raw) 보기: https://raw.githubusercontent.com/rkddofk-oss/clover/main/ai_studio_code%20(8).html
+## 링크
 
-- **`index.html`** — GitHub에서 보기: https://github.com/rkddofk-oss/clover/blob/main/index.html
-  - 설명: 사이트의 메인 HTML 파일로, 프로젝트의 진입점입니다.
-  - 원시(Raw) 보기: https://raw.githubusercontent.com/rkddofk-oss/clover/main/index.html
+- GitHub 파일 페이지 (뷰어): https://github.com/rkddofk-oss/clover/blob/3bb332e106780e360ecec7b73be40460c53676fd/christmas-in-myeongdong.html
+- Raw HTML (브라우저에서 바로 열기 가능, 고정 링크): https://raw.githubusercontent.com/rkddofk-oss/clover/3bb332e106780e360ecec7b73be40460c53676fd/christmas-in-myeongdong.html
 
-- **`README.md`** — GitHub에서 보기: https://github.com/rkddofk-oss/clover/blob/main/README.md
-  - 설명: 이 README 파일입니다. 저장소와 주요 파일에 대한 간단한 설명을 포함합니다.
-  - 원시(Raw) 보기: https://raw.githubusercontent.com/rkddofk-oss/clover/main/README.md
+## 사용 방법
 
-> 참고: 위 링크들은 현재 기본 브랜치(`main`) 기준이며, 파일명이 변경되거나 브랜치가 다르면 링크가 동작하지 않을 수 있습니다.
+1. 위의 Raw HTML 링크를 브라우저 주소창에 붙여넣으면 HTML 파일이 렌더링되어 웹페이지처럼 열립니다.
+2. 로컬에서 확인하려면 파일을 다운로드한 뒤 로컬 브라우저로 열어보세요.
+3. 정식 도메인/호스팅으로 공개하려면 GitHub Pages 또는 다른 정적 호스팅(예: Netlify, Vercel 등)을 사용하세요.
+   - GitHub Pages 설정: 저장소 Settings → Pages에서 브랜치와 경로를 선택하면, 보통 https://{사용자명}.github.io/{저장소명}/christmas-in-myeongdong.html 형태로 접근할 수 있습니다.
+
+## 참고
+
+- Raw 링크는 특정 커밋(3bb332e) 기준이므로 파일 내용이 변경되어도 해당 커밋 시점의 파일을 그대로 볼 수 있습니다.
+- 일부 브라우저/환경에서 보안 설정(CORS 등)으로 인해 바로 렌더링되지 않을 수 있으니 문제가 있을 경우 로컬로 다운로드하여 확인하세요.
 
 ---
 
-### 추가 안내 💡
-- 파일에 접근할 때 브라우저에서 GitHub 페이지의 **"Raw"** 버튼을 클릭하면 원시 파일 내용을 바로 볼 수 있습니다.
-- 필요한 경우 각 파일에 대한 더 자세한 설명이나 예제를 추가해 드릴 수 있습니다.
+문의: README에 추가로 포함할 정보(예: GitHub Pages 설정 대행, 미리보기 스크린샷 등)가 있으면 알려주세요.
