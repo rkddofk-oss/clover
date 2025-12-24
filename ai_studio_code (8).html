@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 명동 도심 여행 가이드: 올인원 인포그래픽</title>
+    <!-- Chart.js CDN for Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #f4f4f9;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --accent-color: #ff4757;
+            --secondary-color: #2f3542;
+            --border-color: #e1e1e1;
+            --chart-text: #666;
+            --header-bg: linear-gradient(135deg, #ff9ff3 0%, #feca57 100%);
+            --header-text: #fff;
+        }
+
+        /* Dark Mode Variables */
+        body.dark-mode {
+            --bg-color: #1e1e2e;
+            --text-color: #e0e0e0;
+            --card-bg: #2d2d44;
+            --accent-color: #ff6b81;
+            --secondary-color: #a4b0be;
+            --border-color: #444;
+            --chart-text: #ccc;
+            --header-bg: linear-gradient(135deg, #30336b 0%, #130f40 100%);
+            --header-text: #f1f2f6;
+        }
+
+        * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
+        body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        
+        /* Navigation */
+        nav { position: sticky; top: 0; background: var(--card-bg); padding: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.2rem; color: var(--accent-color); }
+        .theme-toggle { cursor: pointer; background: none; border: none; font-size: 1.5rem; color: var(--text-color); }
+        
+        /* Layout */
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        section { margin-bottom: 4rem; padding: 2rem; background: var(--card-bg); border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        
+        /* Header */
+        header { background: var(--header-bg); color: var(--header-text); padding: 4rem 2rem; text-align: center; border-radius: 0 0 30px 30px; margin-bottom: 3rem; }
+        header h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        header p { font-size: 1.2rem; max-width: 800px; margin: 0 auto; opacity: 0.9; }
+
+        /* Typography & Expandable Text */
+        h2 { color: var(--accent-color); border-bottom: 2px solid var(--border-color); padding-bottom: 10px; display: inline-block; }
+        .long-text { font-size: 0.95rem; color: var(--text-color); margin-top: 1rem; white-space: pre-line; }
+        .read-more-btn { color: var(--accent-color); cursor: pointer; font-weight: bold; margin-top: 0.5rem; display: inline-block; }
+        .hidden-content { display: none; margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.03); border-radius: 8px; }
+        
+        /* Interactive Elements */
+        /* 1. Tabs */
+        .tabs { display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); }
+        .tab-btn { background: none; border: none; padding: 10px 20px; font-size: 1.1rem; color: var(--secondary-color); cursor: pointer; border-bottom: 3px solid transparent; }
+        .tab-btn.active { border-bottom-color: var(--accent-color); font-weight: bold; color: var(--accent-color); }
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+
+        /* 2. Cards */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--bg-color); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card-badge { position: absolute; top: 10px; right: 10px; background: var(--accent-color); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; }
+
+        /* 3. Filters */
+        .filters { margin-bottom: 1rem; }
+        .filter-btn { padding: 5px 15px; margin-right: 5px; border-radius: 20px; border: 1px solid var(--accent-color); background: transparent; color: var(--text-color); cursor: pointer; }
+        .filter-btn.active { background: var(--accent-color); color: white; }
+
+        /* 4. Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { background-color: rgba(0,0,0,0.05); color: var(--accent-color); }
+        tr:hover { background-color: rgba(0,0,0,0.02); }
+
+        /* 5. Checklist */
+        .checklist-item { display: flex; align-items: center; margin: 10px 0; cursor: pointer; }
+        .checklist-item input { margin-right: 10px; transform: scale(1.2); accent-color: var(--accent-color); }
+        .checklist-item.checked span { text-decoration: line-through; opacity: 0.6; }
+
+        /* 6. Tooltip/Modal Hint */
+        .hint-icon { color: var(--accent-color); cursor: help; margin-left: 5px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .tabs { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="logo"><i class="fas fa-map-marked-alt"></i> MYEONGDONG 2025</div>
+    <button class="theme-toggle" onclick="toggleTheme()" title="테마 변경">
+        <i class="fas fa-moon"></i>
+    </button>
+</nav>
+
+<!-- Header -->
+<header>
+    <h1>2025 명동 도심 여행 가이드</h1>
+    <p>미식, 예술, 역사가 공존하는 서울의 심장부, 명동.<br>오전 11시부터 오후 6시 30분까지, 30분 단위의 전략적 코스로 완성하는 궁극의 하루.</p>
+</header>
+
+<div class="container">
+
+    <!-- Section 1: Strategy & Efficiency (Interaction: Chart) -->
+    <section id="strategy">
+        <h2><i class="fas fa-chess"></i> 여행 전략: 30분의 법칙</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>이동 효율성 분석</h3>
+                <canvas id="efficiencyChart"></canvas>
+            </div>
+            <div class="card">
+                <h3>전략 핵심 요약</h3>
+                <p>명동 여행의 핵심은 '속도'와 '밀도'입니다. 한 장소에 30분 이상 머무르지 않는 '치고 빠지기' 전략이 필요합니다.</p>
+                <div class="long-text">
+                    <span class="teaser">서울의 중심 명동은 겉보기엔 단순한 쇼핑 거리 같지만, 골목마다 숨겨진 명소들이 즐비합니다. 이 모든 것을 반나절 만에 경험하기 위해서는 철저한 시간 관리가 필수적입니다.</span>
+                    <div class="hidden-content" id="desc1">
+                        <strong>1. 30분의 법칙:</strong> 하나의 스팟에서 사진 촬영, 감상, 체험을 30분 내에 끝내는 것을 원칙으로 합니다. 이는 지루함을 방지하고 짧은 시간 내에 15개 이상의 콘텐츠를 소비하게 해줍니다.<br><br>
+                        <strong>2. 도보와 대중교통의 조화:</strong> 명동 내부는 도보 이동이 가장 빠르지만, 을지로나 회현 방향으로 이동할 때는 지하철 한 정거장이라도 탑승하여 체력을 비축해야 합니다. 특히 주말 명동의 교통 체증은 상상을 초월하므로 택시보다는 지하철 이용이 '시간을 버는' 지름길입니다.<br><br>
+                        <strong>3. 사전 예약과 앱 활용:</strong> 롯데백화점이나 신세계의 주차, 혹은 그라운드시소 전시 등은 현장 구매보다 사전 예약이 필수입니다. 대기 시간을 '0'으로 만드는 것이 이 고효율 투어의 핵심 성공 요인입니다.
+                    </div>
+                    <a class="read-more-btn" onclick="toggleText('desc1', this)">더 보기 <i class="fas fa-chevron-down"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Time Schedule (Interaction: Tabs) -->
+    <section id="schedule">
+        <h2><i class="fas fa-clock"></i> 시간대별 추천 코스</h2>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'morning')">오전 (11:00~12:30)</button>
+            <button class="tab-btn" onclick="openTab(event, 'afternoon')">오후 (12:30~16:00)</button>
+            <button class="tab-btn" onclick="openTab(event, 'evening')">저녁 (16:00~18:30)</button>
+        </div>
+
+        <!-- Morning Tab -->
+        <div id="morning" class="tab-content active">
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-badge">11:00 AM</div>
+                    <h3>그라운드시소 명동</h3>
+                    <p>에비뉴엘 9층에서 만나는 몰입형 미디어 아트.</p>
+                    <div class="long-text">
+                        <span class="teaser">롯데백화점 본점 에비뉴엘 9층에 위치한 그라운드시소는 단순한 전시관이 아닙니다. 거대한 스크린과 웅장한 사운드가 결합된 미디어 아트는 관람객을 압도합니다.</span>
+                        <div class="hidden-content" id="desc2">
+                            특히 반 고흐 등 거장들의 명화를 소재로 한 전시는 원화의 감동을 넘어선 새로운 시각적 경험을 제공합니다. 30분이라는 제한된 시간 동안 하이라이트 구간을 집중적으로 관람하고, 전시의 여운을 간직할 수 있는 굿즈샵을 빠르게 둘러보는 것이 좋습니다. 에비뉴엘 건물의 고급스러운 인테리어 또한 놓칠 수 없는 볼거리이며, 오픈 시간에 맞춰 방문하면 가장 쾌적하게 관람할 수 있습니다.
+                        </div>
+                        <a class="read-more-btn" onclick="toggleText('desc2', this)">상세 설명 보기</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-badge">12:00 PM</div>
+                    <h3>롯데 타운 크리스마스</h3>
+                    <p>백화점 외관을 감싸는 화려한 연말 장식 관람.</p>
+                    <div class="long-text">
+                        <span class="teaser">11월부터 시작되는 롯데백화점의 크리스마스 장식은 명동의 겨울을 알리는 신호탄입니다. 'My Dearest Wish' 같은 테마로 꾸며진 외관은 낮에도 아름답습니다.</span>
+                        <div class="hidden-content" id="desc3">
+                            밤의 야경도 훌륭하지만, 오전에 방문하면 인파에 치이지 않고 여유롭게 인증샷을 남길 수 있다는 장점이 있습니다. 거대한 트리와 움직이는 쇼윈도 디스플레이(피규어 등)는 아이들뿐만 아니라 어른들의 동심도 자극합니다. 에비뉴엘과 본점 사이의 연결 통로 및 광장은 최고의 포토존이므로, 다음 장소로 이동하기 전 이곳에서 여행의 첫 인생샷을 남겨보세요.
+                        </div>
+                        <a class="read-more-btn" onclick="toggleText('desc3', this)">상세 설명 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Afternoon Tab -->
+        <div id="afternoon" class="tab-content">
+            <div class="card">
+                <h3><i class="fas fa-utensils"></i> 점심 미션: 길거리 미식 투어</h3>
+                <p>식당에 들어가는 시간조차 아깝다! 길거리 음식으로 해결하는 3코스 런치.</p>
+                <div class="long-text">
+                    명동의 길거리 음식은 이제 하나의 거대한 '레스토랑'과 같습니다. 점심시간에는 식당 대기 줄이 길기 때문에, 노점을 순회하며 식사를 해결하는 것이 시간적으로나 경험적으로 이득입니다. <br>
+                    <strong>추천 조합:</strong> 매콤한 떡볶이로 입맛을 돋우고, 바삭한 튀김이나 닭꼬치로 단백질을 보충한 뒤, 호떡이나 붕어빵으로 디저트까지 마무리하는 코스입니다. 현금을 준비하거나 계좌이체가 가능하니 미리 준비하세요.
+                </div>
+            </div>
+            <br>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-badge">14:00 PM</div>
+                    <h3>위글위글집 & 말똥카니발</h3>
+                    <p>색감 깡패! 명동의 새로운 랜드마크 소품샵 투어.</p>
+                    <ul style="font-size: 0.9rem; padding-left: 20px;">
+                        <li><strong>위글위글집:</strong> 3층 규모의 포토존 + 소품샵. 꽃무늬 쿠션 필수.</li>
+                        <li><strong>말똥카니발:</strong> 파주의 핫플이 명동에! 도넛과 화려한 네온사인.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-badge">15:30 PM</div>
+                    <h3>장충단공원 스타벅스 (이동)</h3>
+                    <p>택시로 10분, 도심 속 한옥의 정취를 느끼다.</p>
+                    <div class="hidden-content" id="desc4" style="display:block;">
+                        명동의 번잡함에서 잠시 벗어나 힐링이 필요한 시점입니다. 택시를 타고 남산 자락의 장충단공원으로 이동해 보세요. 이곳의 스타벅스는 한옥 스타일로 지어져 있어 고즈넉한 분위기를 자아냅니다. 현대적인 커피와 전통 건축의 조화는 특별한 휴식을 선사합니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evening Tab -->
+        <div id="evening" class="tab-content">
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-badge">16:00 PM</div>
+                    <h3>명동대성당</h3>
+                    <p>한국 천주교의 심장, 고딕 양식의 숭고미.</p>
+                    <div class="long-text">
+                        붉은 벽돌의 명동대성당은 종교를 떠나 마음의 평화를 주는 공간입니다. 특히 해 질 녘 성당 언덕에서 바라보는 서울의 풍경과 성당의 실루엣은 장관입니다. 크리스마스 시즌에는 성당 앞마당에 LED 장미와 구유가 설치되어 더욱 낭만적입니다. 지하의 1898 광장에는 서점과 갤러리가 있어 잠시 몸을 녹이기에도 좋습니다.
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-badge">17:00 PM</div>
+                    <h3>신세계 미디어파사드</h3>
+                    <p>겨울 명동 여행의 하이라이트, 빛의 축제.</p>
+                    <div class="long-text">
+                        해가 지면 신세계백화점 본점 외벽은 거대한 스크린으로 변신합니다. 아나몰픽 기법을 활용한 3D 영상은 건물이 춤추는 듯한 착각을 불러일으킵니다. 약 3분 30초 동안 반복 재생되며, 별도의 예약 없이 무료로 관람 가능합니다. 가장 웅장한 사운드와 영상을 즐길 수 있는 최고의 쇼타임입니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Street Food Analysis (Interaction: Filter & Radar Chart) -->
+    <section id="food">
+        <h2><i class="fas fa-hamburger"></i> 길거리 음식 대백과</h2>
+        
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterFood('all')">전체</button>
+            <button class="filter-btn" onclick="filterFood('sweet')">달콤 (디저트)</button>
+            <button class="filter-btn" onclick="filterFood('spicy')">매콤 (식사)</button>
+            <button class="filter-btn" onclick="filterFood('salty')">단짠 (간식)</button>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+            <div style="flex: 1; min-width: 300px;">
+                <table id="foodTable">
+                    <thead>
+                        <tr>
+                            <th>메뉴</th>
+                            <th>가격대</th>
+                            <th>특징</th>
+                            <th>카테고리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- JS generated rows will go here -->
+                    </tbody>
+                </table>
+            </div>
+            <div style="flex: 1; min-width: 300px; height: 300px;">
+                <canvas id="foodRadarChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="long-text">
+            <p style="margin-top: 20px;">
+                <strong>💡 미식 팁:</strong> 명동의 길거리 음식 가격은 일반 분식점보다 다소 높을 수 있습니다(평균 4,000원~8,000원). 하지만 관광지 특유의 분위기와 즉석 조리의 퀄리티를 고려하면 충분한 가치가 있습니다. 위 표는 주요 메뉴들의 맛의 특징과 가격대를 비교 분석한 자료입니다. 현금 결제가 빠르지만, 최근에는 많은 노점에서 카드나 계좌이체도 지원합니다. 휴지를 꼭 챙기시고, 쓰레기는 지정된 쓰레기통에 버려주세요.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 4: Tips & Checklist (Interaction: Checklist & Modal) -->
+    <section id="tips">
+        <h2><i class="fas fa-clipboard-check"></i> 여행 준비 & 꿀팁 체크리스트</h2>
+        
+        <div class="card-grid">
+            <div class="card">
+                <h3><i class="fas fa-check-square"></i> 필수 준비물</h3>
+                <div id="checklist-container">
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <input type="checkbox"> <span>편안한 운동화 (도보 이동 많음)</span>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <input type="checkbox"> <span>보조 배터리 (사진 촬영 필수)</span>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <input type="checkbox"> <span>현금 3만원 (길거리 음식용 소액권)</span>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <input type="checkbox"> <span>핫팩 (겨울철 야외 대기 대비)</span>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <input type="checkbox"> <span>백화점 앱 설치 (무료 주차권 확보)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="background: var(--secondary-color); color: white;">
+                <h3><i class="fas fa-exclamation-triangle"></i> 주의사항 (12/24 이브)</h3>
+                <p>크리스마스 이브에는 인파 안전 관리를 위해 <strong>명동 노점상이 전면 휴업</strong>합니다.</p>
+                <hr style="border-color: rgba(255,255,255,0.2);">
+                <p style="font-size: 0.9rem;">이 날짜에 방문하신다면 길거리 음식 계획을 수정하고, 주변 식당을 미리 예약하세요. 또한 명동역과 을지로입구역이 매우 혼잡하므로 회현역 등을 이용해 우회 접근하는 것이 좋습니다.</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 1.5rem;">
+            <h3>📷 신세계 미디어파사드 관람 명당 찾기</h3>
+            <p>모두가 사진을 찍지만, 진짜 명당은 따로 있습니다.</p>
+            <button class="read-more-btn" style="background: var(--accent-color); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;" onclick="alert('명당 위치: 회현지하쇼핑센터 1번, 2번 출구 앞!\n\n이곳은 백화점 전체가 한눈에 들어오는 왜곡 없는 뷰포인트입니다. 광각 렌즈를 준비하시면 더욱 웅장한 영상을 담을 수 있습니다.')">
+                명당 위치 확인하기 (클릭)
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem; color: var(--chart-text);">
+        <p>&copy; 2025 Seoul Travel Guide. Based on Myeongdong Analysis Data.</p>
+        <p style="font-size: 0.8rem;">본 가이드는 2025년 1월 기준 정보를 바탕으로 작성되었습니다. 매장 사정에 따라 변동될 수 있습니다.</p>
+    </footer>
+
+</div>
+
+<script>
+    // 1. Dark Mode Toggle
+    function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+        const btn = document.querySelector('.theme-toggle i');
+        if (document.body.classList.contains('dark-mode')) {
+            btn.classList.remove('fa-moon');
+            btn.classList.add('fa-sun');
+            updateCharts(true);
+        } else {
+            btn.classList.remove('fa-sun');
+            btn.classList.add('fa-moon');
+            updateCharts(false);
+        }
+    }
+
+    // 2. Tab Functionality
+    function openTab(evt, tabName) {
+        var i, tabContent, tabBtns;
+        tabContent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabContent.length; i++) {
+            tabContent[i].classList.remove("active");
+        }
+        tabBtns = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tabBtns.length; i++) {
+            tabBtns[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+
+    // 3. Expandable Text (Accordion)
+    function toggleText(id, btn) {
+        const content = document.getElementById(id);
+        if (content.style.display === "block") {
+            content.style.display = "none";
+            btn.innerHTML = '더 보기 <i class="fas fa-chevron-down"></i>';
+        } else {
+            content.style.display = "block";
+            btn.innerHTML = '접기 <i class="fas fa-chevron-up"></i>';
+        }
+    }
+
+    // 4. Checklist Interaction
+    function toggleCheck(item) {
+        const checkbox = item.querySelector('input');
+        checkbox.checked = !checkbox.checked;
+        if(checkbox.checked) {
+            item.classList.add('checked');
+        } else {
+            item.classList.remove('checked');
+        }
+    }
+
+    // 5. Data for Charts & Tables
+    const streetFoodData = [
+        { name: "호떡", price: "2.0k", type: "sweet", score: [8, 9, 2, 5, 4] }, // [맛, 가성비, 포만감, 대기시간, 사진빨]
+        { name: "떡볶이", price: "4.0k", type: "spicy", score: [9, 7, 8, 4, 6] },
+        { name: "랍스터구이", price: "20.0k", type: "salty", score: [8, 3, 6, 6, 9] },
+        { name: "계란빵", price: "2.5k", type: "sweet", score: [7, 8, 5, 3, 5] },
+        { name: "마약김밥", price: "3.5k", type: "salty", score: [8, 8, 9, 2, 4] },
+        { name: "회오리감자", price: "4.0k", type: "salty", score: [7, 6, 4, 3, 8] },
+        { name: "크로플", price: "5.0k", type: "sweet", score: [9, 5, 4, 5, 9] }
+    ];
+
+    // 6. Initialize Table
+    function renderTable(filterType) {
+        const tbody = document.querySelector('#foodTable tbody');
+        tbody.innerHTML = '';
+        streetFoodData.forEach(food => {
+            if (filterType === 'all' || food.type === filterType) {
+                const tr = document.createElement('tr');
+                let typeLabel = food.type === 'sweet' ? '달콤' : (food.type === 'spicy' ? '매콤' : '단짠');
+                tr.innerHTML = `<td>${food.name}</td><td>${food.price}</td><td>${getFeatureText(food.name)}</td><td><span style="font-size:0.8rem; padding:2px 5px; border-radius:4px; background:${getColorByType(food.type)}; color:white;">${typeLabel}</span></td>`;
+                tbody.appendChild(tr);
+            }
+        });
+    }
+
+    function getFeatureText(name) {
+        if(name.includes('호떡')) return '쫄깃함과 시럽';
+        if(name.includes('떡볶이')) return '한국의 매운맛';
+        if(name.includes('랍스터')) return '럭셔리 길거리 음식';
+        if(name.includes('계란빵')) return '단짠의 조화';
+        if(name.includes('김밥')) return '겨자 소스 필수';
+        return '인기 메뉴';
+    }
+
+    function getColorByType(type) {
+        if(type === 'sweet') return '#ffa502';
+        if(type === 'spicy') return '#ff4757';
+        return '#7bed9f'; // salty/savory
+    }
+
+    // 7. Filter Logic
+    function filterFood(type) {
+        renderTable(type);
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        updateRadarChart(type);
+    }
+
+    // 8. Charts Initialization
+    let effChart, foodChart;
+
+    window.onload = function() {
+        renderTable('all');
+
+        // Efficiency Chart (Bar)
+        const ctxEff = document.getElementById('efficiencyChart').getContext('2d');
+        effChart = new Chart(ctxEff, {
+            type: 'bar',
+            data: {
+                labels: ['도보', '지하철', '택시(혼잡)', '자가용(주차)'],
+                datasets: [{
+                    label: '이동 효율성 점수 (10점 만점)',
+                    data: [9.5, 8.5, 4.0, 3.0],
+                    backgroundColor: ['#2ed573', '#1e90ff', '#ff6b81', '#a4b0be'],
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, max: 10 } }
+            }
+        });
+
+        // Food Radar Chart
+        updateRadarChart('all');
+    };
+
+    function updateRadarChart(filter) {
+        const ctxFood = document.getElementById('foodRadarChart').getContext('2d');
+        
+        // Calculate average scores based on filter
+        let targetFoods = filter === 'all' ? streetFoodData : streetFoodData.filter(f => f.type === filter);
+        if(targetFoods.length === 0) targetFoods = streetFoodData; // Fallback
+
+        // Simple visual representation: Take the first item or average (Simulating specific item data for demo)
+        // Let's visualize "Tteokbokki" vs "Lobster" vs "Hotveok" if 'all', or average of category
+        
+        const dataValues = filter === 'all' 
+            ? [8, 6, 7, 5, 7] // Average-ish
+            : targetFoods[0].score; // Take representative item
+
+        const labelName = filter === 'all' ? '전체 평균' : targetFoods[0].name + ' (대표)';
+
+        if (foodChart) foodChart.destroy();
+
+        foodChart = new Chart(ctxFood, {
+            type: 'radar',
+            data: {
+                labels: ['맛', '가성비', '포만감', '대기시간', '인스타감성'],
+                datasets: [{
+                    label: labelName,
+                    data: dataValues,
+                    backgroundColor: 'rgba(255, 71, 87, 0.2)',
+                    borderColor: 'rgba(255, 71, 87, 1)',
+                    pointBackgroundColor: 'rgba(255, 71, 87, 1)',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0,0,0,0.1)' },
+                        grid: { color: 'rgba(0,0,0,0.1)' },
+                        suggestedMin: 0,
+                        suggestedMax: 10
+                    }
+                }
+            }
+        });
+    }
+
+    // 9. Update Charts for Dark Mode
+    function updateCharts(isDark) {
+        const color = isDark ? '#ccc' : '#666';
+        const gridColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+        
+        if(effChart) {
+            effChart.options.scales.x.ticks.color = color;
+            effChart.options.scales.y.ticks.color = color;
+            effChart.options.scales.y.grid.color = gridColor;
+            effChart.update();
+        }
+        if(foodChart) {
+            foodChart.options.scales.r.pointLabels.color = color;
+            foodChart.options.scales.r.grid.color = gridColor;
+            foodChart.options.scales.r.angleLines.color = gridColor;
+            foodChart.update();
+        }
+    }
+</script>
+
+</body>
+</html>
