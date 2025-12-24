@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>2025 명동 도심 여행 가이드</title>
+
+    <!-- Reveal.js CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-color: #ffffff;
+            --accent-color: #ffeb3b;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .reveal .slides section {
+            color: var(--text-color);
+            text-align: left;
+            padding: 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* 제목 스타일 (24pt) */
+        .reveal h1, .reveal h2 {
+            font-size: 24pt !important;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border-bottom: 2px solid var(--glass-border);
+            padding-bottom: 10px;
+        }
+
+        /* 내용 스타일 (17pt) */
+        .reveal p, .reveal li, .reveal table, .reveal div {
+            font-size: 17pt !important;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .reveal strong {
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .reveal ul {
+            margin-left: 1.5em;
+        }
+
+        .reveal li {
+            margin-bottom: 15px;
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.2) !important;
+            font-weight: 700 !important;
+        }
+
+        td, th {
+            padding: 12px !important;
+            border: 1px solid var(--glass-border) !important;
+        }
+
+        .highlight-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        /* 애니메이션 효과 */
+        .fragment.fade-up {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1 -->
+            <section>
+                <h1>[Slide 1] 2025 명동 도심 여행 가이드 개요</h1>
+                <p>서울의 심장부인 명동은 단순한 쇼핑가를 넘어 <strong>세계적인 미식과 예술, 역사</strong>가 공존하는 복합 문화 공간입니다.</p>
+                <ul>
+                    <li class="fragment">글로벌 미식 성지의 역동적인 에너지 파악</li>
+                    <li class="fragment">30분 단위 효율적 시간 관리 전략</li>
+                    <li class="fragment">쇼핑, 문화, 역사 명소의 최적화된 동선</li>
+                    <li class="fragment">2025년 최신 트렌드 및 크리스마스 정보 수록</li>
+                </ul>
+            </section>
+
+            <!-- Slide 2 -->
+            <section>
+                <h1>[Slide 2] 여행 전략: 30분의 법칙</h1>
+                <p>각 장소 체류 시간을 <strong>최대 30분</strong>으로 제한하여 하루 15개 이상의 명소를 섭렵하는 '고효율 투어' 전략입니다.</p>
+                <div class="highlight-box">
+                    <strong>[이동 효율 비교]</strong><br>
+                    • 도보: 명동 내 근거리 연결 (최상)<br>
+                    • 지하철: 을지로-종로-회현역 연결 (우수)<br>
+                    • 주차: 공영 및 백화점 앱 활용 (필수)
+                </div>
+            </section>
+
+            <!-- Slide 3 -->
+            <section>
+                <h1>[Slide 3] 오전 일정: 예술과 쇼핑 (11:00-12:00)</h1>
+                <p>롯데백화점 에비뉴엘 9층 <strong>'그라운드시소 명동'</strong>에서 몰입형 미디어 아트로 하루를 시작합니다.</p>
+                <table>
+                    <thead>
+                        <tr><th>장소</th><th>위치</th><th>활동</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>그라운드시소</td><td>에비뉴엘 9F</td><td>미디어 아트 관람</td></tr>
+                        <tr><td>롯데 타운</td><td>백화점 외곽</td><td>크리스마스 장식</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Slide 4 -->
+            <section>
+                <h1>[Slide 4] 12:30 점심: 길거리 미식 투어</h1>
+                <p>메인 거리의 노점을 활용하여 짧은 시간 내에 <strong>명동의 진한 맛</strong>을 경험합니다.</p>
+                <div class="highlight-box">
+                    <strong>[추천 메뉴 조합]</strong><br>
+                    • 매콤: 떡볶이 (고추장 베이스)<br>
+                    • 고소: 튀김 (오징어, 새우)<br>
+                    • 든든: 마약김밥 (겨자 소스)
+                </div>
+            </section>
+
+            <!-- Slide 5 -->
+            <section>
+                <h1>[Slide 5] 길거리 음식 1: 호떡 & 붕어빵</h1>
+                <p>겨울철 필수 디저트로, 갓 구워낸 따끈함이 특징입니다.</p>
+                <ul>
+                    <li><strong>호떡:</strong> 1,500~3,000원 | 시나몬 설탕의 달콤함</li>
+                    <li><strong>붕어빵:</strong> 2,000~3,000원 | 팥소와 슈크림의 조화</li>
+                    <li>팁: 회전율이 높은 곳을 선택하여 바삭함을 유지</li>
+                </ul>
+            </section>
+
+            <!-- Slide 6 -->
+            <section>
+                <h1>[Slide 6] 길거리 음식 2: 떡볶이 & 김밥</h1>
+                <p>강렬한 매운맛과 고소한 참기름 향의 완벽한 조화입니다.</p>
+                <ul>
+                    <li><strong>떡볶이:</strong> 매콤달콤한 소스와 어묵 국물의 조합</li>
+                    <li><strong>마약김밥:</strong> 중독성 있는 겨자 소스 제공</li>
+                    <li>전략: 여러 노점의 음식을 조금씩 맛보는 미식 활동</li>
+                </ul>
+            </section>
+
+            <!-- Slide 7 -->
+            <section>
+                <h1>[Slide 7] 길거리 음식 3: 치킨 & 닭꼬치</h1>
+                <p>한국식 바삭함과 직화 불맛의 정수를 경험하세요.</p>
+                <table>
+                    <thead>
+                        <tr><th>메뉴</th><th>가격</th><th>특징</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>컵치킨</td><td>5k~9k</td><td>이중 튀김의 바삭함</td></tr>
+                        <tr><td>닭꼬치</td><td>4k~5k</td><td>직화 구이, 파 조합</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Slide 8 -->
+            <section>
+                <h1>[Slide 8] 길거리 음식 4: 계란빵 & 핫도그</h1>
+                <p>비주얼과 맛을 모두 잡은 인스타그램 친화적 간식입니다.</p>
+                <ul>
+                    <li><strong>계란빵:</strong> 폭신한 빵과 통계란의 '단짠' 조화</li>
+                    <li><strong>핫도그:</strong> 모짜렐라 치즈가 늘어나는 시각적 즐거움</li>
+                    <li>팁: 감자 큐브 토핑을 추가하여 식감 극대화</li>
+                </ul>
+            </section>
+
+            <!-- Slide 9 -->
+            <section>
+                <h1>[Slide 9] 길거리 음식 종합 비교표</h1>
+                <table>
+                    <thead>
+                        <tr><th>항목</th><th>맛의 특징</th><th>추천 상황</th><th>채식</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>호떡</td><td>달콤/쫄깃</td><td>추울 때</td><td>가능</td></tr>
+                        <tr><td>떡볶이</td><td>매콤/달콤</td><td>배고플 때</td><td>불가</td></tr>
+                        <tr><td>계란빵</td><td>단짠/포근</td><td>브런치</td><td>가능</td></tr>
+                        <tr><td>핫도그</td><td>바삭/풍성</td><td>포토타임</td><td>불가</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Slide 10 -->
+            <section>
+                <h1>[Slide 10] 오후 2:00 체험: 위글위글집</h1>
+                <p>3층 규모의 거대한 <strong>소품샵이자 포토존</strong>으로 명동역 8번 출구 인근에 위치합니다.</p>
+                <ul>
+                    <li>1F: 굿즈 & 핑크 입구 (강렬한 첫인상)</li>
+                    <li>2F: 라이프스타일 룸 (집 컨셉 인테리어)</li>
+                    <li>3F: 플레이그라운드 & 루프탑 (야외 포토존)</li>
+                </ul>
+            </section>
+
+            <!-- Slide 11 -->
+            <section>
+                <h1>[Slide 11] 오후 2:30 이색 데이트: 말똥카니발</h1>
+                <p>엠플라자 4층, 화려한 네온사인과 조형물이 가득한 <strong>'어른들의 놀이터'</strong>입니다.</p>
+                <ul>
+                    <li>도넛 카페와 굿즈샵, 스튜디오의 결합</li>
+                    <li>피규어 구경 및 인형 뽑기 등 동심 체험</li>
+                    <li>네이버 예약 시 패키지 할인 혜택 확인 필수</li>
+                </ul>
+            </section>
+
+            <!-- Slide 12 -->
+            <section>
+                <h1>[Slide 12] 오후 3:00 심층 체험: 안나아트 & 비트포비아</h1>
+                <p>정적인 힐링과 동적인 스릴 중 취향에 맞는 활동을 선택합니다.</p>
+                <ul>
+                    <li><strong>안나아트:</strong> 미술치료와 명동 뷰 차 한 잔의 여유</li>
+                    <li><strong>비트포비아:</strong> 두뇌 풀가동 방탈출 게임</li>
+                    <li>효율: 컨디션에 따라 30~60분 코스 설계</li>
+                </ul>
+            </section>
+
+            <!-- Slide 13 -->
+            <section>
+                <h1>[Slide 13] 오후 3:30 특별 동선: 한옥 스타벅스</h1>
+                <p>장충단공원 내 위치한 <strong>한옥 스타일 스타벅스</strong>를 방문합니다.</p>
+                <table>
+                    <thead>
+                        <tr><th>수단</th><th>시간</th><th>비고</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>택시</td><td>10~15분</td><td>신속 이동 권장</td></tr>
+                        <tr><td>지하철</td><td>20분</td><td>동대입구역 6번 출구</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Slide 14 -->
+            <section>
+                <h1>[Slide 14] 오후 4:00 역사 명소: 명동대성당</h1>
+                <p>한국 천주교의 상징이자 고딕 양식의 정수인 <strong>명동대성당</strong>입니다.</p>
+                <ul>
+                    <li>경건한 분위기 속에서 성찰의 시간</li>
+                    <li>크리스마스 시즌 대형 트리와 구유 장식 관람</li>
+                    <li>성당 지하 복합문화공간 '인터파크 북파크' 탐방</li>
+                </ul>
+            </section>
+
+            <!-- Slide 15 -->
+            <section>
+                <h1>[Slide 15] 오후 5:00 정점: 신세계 미디어파사드</h1>
+                <p>아나몰픽 3D 기술로 건물이 살아 움직이는 <strong>빛의 예술</strong>입니다.</p>
+                <ul>
+                    <li>운영: 17:00 ~ 24:00 (11월~1월)</li>
+                    <li>상영: 약 3분 30초 반복 재생</li>
+                    <li>특징: 웅장한 클래식 음악과 입체 영상의 조화</li>
+                </ul>
+            </section>
+
+            <!-- Slide 16 -->
+            <section>
+                <h1>[Slide 16] 관람 팁: 미디어파사드 명당</h1>
+                <p>최고의 각도는 <strong>'회현지하쇼핑센터 1, 2번 출구 앞'</strong>입니다.</p>
+                <div class="highlight-box">
+                    • 정면 뷰: 입체감이 가장 잘 느껴짐<br>
+                    • 촬영 팁: 광각 렌즈 사용 권장<br>
+                    • 주의: 인파 혼잡 시 안전 요원 지시 준수
+                </div>
+            </section>
+
+            <!-- Slide 17 -->
+            <section>
+                <h1>[Slide 17] 백화점 크리스마스 마켓 비교</h1>
+                <table>
+                    <thead>
+                        <tr><th>백화점</th><th>마켓 특징</th><th>예약</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>롯데</td><td>뱅쇼, 프리미엄 사진권</td><td>권장</td></tr>
+                        <tr><td>신세계</td><td>리빙 아이템, 가챠 토이</td><td>현장</td></tr>
+                        <tr><td>현대</td><td>해리 곰인형, 대형 트리</td><td>필수</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Slide 18 -->
+            <section>
+                <h1>[Slide 18] 주차 가이드: 경제적인 전략</h1>
+                <p>주차비 절약을 위해 앱과 공영 시설을 적극 활용합니다.</p>
+                <ul>
+                    <li><strong>대한적십자사:</strong> 10분 500원 (최저가 수준)</li>
+                    <li><strong>백화점 앱:</strong> 신세계/롯데 앱 회원 무료 주차권</li>
+                    <li><strong>대신파이낸스:</strong> 주말 이용 시 4시간 무료 혜택</li>
+                </ul>
+            </section>
+
+            <!-- Slide 19 -->
+            <section>
+                <h1>[Slide 19] 안전 정보: 크리스마스 이브</h1>
+                <p>12월 24일은 <strong>인파 관리</strong>를 위해 특별 조치가 시행됩니다.</p>
+                <div class="highlight-box">
+                    • 노점상 휴업: 12/24 당일 명동 노점 전체 휴무<br>
+                    • 교통: 성당 주차 불가, 대중교통 이용 필수<br>
+                    • 역 접근: 회현역 7번(신세계), 명동역 8번(메인)
+                </div>
+            </section>
+
+            <!-- Slide 20 -->
+            <section>
+                <h1>[Slide 20] 여행 마무리: 여정 요약</h1>
+                <p><strong>'30분의 법칙'</strong>으로 완성한 명동 압축 투어가 끝났습니다.</p>
+                <div class="highlight-box">
+                    11:00 예술(그라운드시소) → 12:30 미식(길거리음식) → 14:00 쇼핑(위글위글) → 16:00 역사(대성당) → 17:00 야경(미디어파사드)
+                </div>
+                <p style="text-align: center; margin-top: 30px;"><strong>즐거운 명동 여행 되세요!</strong></p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            backgroundTransition: 'fade',
+            // Slide width and height
+            width: 1200,
+            height: 700,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+    </script>
+</body>
+</html>
